@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<title>及格计算器</title>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <script>
+
+    </script>
+    <link
+        href="https://cdn.bootcdn.net/ajax/libs/material-components-web/8.0.0/material-components-web.min.css"
+        rel="stylesheet">
+    <script
+        src="https://cdn.bootcdn.net/ajax/libs/material-components-web/8.0.0/material-components-web.min.js"></script>
+</head>
+<body>
+    <label style="width: 100%;" class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input id="input1" type="num" value="60" class="mdc-text-field__input" aria-labelledby="my-label-id">
+        <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">平时分比例</span>
+            </span>
+            
+            <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <span>%</span>
+    </label>
+    <br>
+    <br>
+    <label style="width: 100%;" class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input id="input2" type="num" value="100" class="mdc-text-field__input" aria-labelledby="my-label-id">
+        <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">平时分</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+        </span>
+    </label>
+    <br>
+    <br>
+    <label style="width: 100%;" class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input id="input3" type="num" value="60" class="mdc-text-field__input" aria-labelledby="my-label-id">
+        <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">目标分数</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+        </span>
+    </label>
+    <br>
+    <br>
+    <label style="width: 100%;" class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input id="input4" type="num" value="0" class="mdc-text-field__input" aria-labelledby="my-label-id">
+        <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="my-label-id">卷面分数</span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+        </span>
+    </label>
+    <br>
+    <br>
+    <script>
+        var calc = function (e) {
+        tempvalue = ((document.getElementById("input3").value * 100) - (document.getElementById("input2").value * document.getElementById("input1").value)) / (100 - document.getElementById("input1").value);
+        if(tempvalue>100){
+        tempvalue="等死吧，卷面满分都不够"
+        }
+        if(tempvalue<=0){
+        tempvalue="有手就行"
+        }
+        document.getElementById("input4").value = tempvalue;
+        }
+        document.getElementById("input1").addEventListener('input', calc);
+        document.getElementById("input2").addEventListener('input', calc);
+        document.getElementById("input3").addEventListener('input', calc);
+    </script>
+    <script>
+        window.mdc.autoInit();
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button1'));
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button2'));
+        mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button3'));
+        var getRandomColor = function () {
+            return '#' + (function (color) {
+                return (color += 'abcdef'[Math.floor(Math.random() * 6)])
+                    && (color.length == 6) ? color : arguments.callee(color);
+            })('');
+        }
+        function strip(num, precision = 10) {
+            return +parseFloat(num.toPrecision(precision));
+        }
+        function funDownload(content, filename) {
+
+            var eleLink = document.createElement('a');
+            eleLink.download = filename;
+            eleLink.style.display = 'none';
+            eleLink.href = content;
+            document.body.appendChild(eleLink);
+            eleLink.click();
+            document.body.removeChild(eleLink);
+        };
+    </script>
+</body>
+
+</html>
